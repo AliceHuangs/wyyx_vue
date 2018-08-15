@@ -1,128 +1,242 @@
 <template>
-  <div class="personal">
-    <Header></Header>
-    <section class="cont">
-      <div class="logo">
-        <img src="../../assets/images/logo.png" alt="">
-      </div>
-      <div class="btns">
-        <div class="btn">
-          <i class="iconfont icon-shouji"></i>
-          <span>手机号码登录</span>
+  <div>
+    <SWHeader/>
+    <div class="loginTypesWrap">
+      <div class="cont">
+        <div class="logoWrap">
+          <img src="//yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="">
         </div>
-        <div class="btn dist">
-          <i class="iconfont icon-youxiang space"></i>
-          <span>邮箱账号登录</span>
+        <div class="btnWrap">
+          <div class="button-block" @click="goLogoin(true)">
+            <i class="loginPhone"></i>
+            <span>帐号登录</span>
+          </div>
+          <div class="button-ghostRed" @click="goLogoin(false)">
+            <i class="loginMail"></i>
+            <span>短信登录</span>
+          </div>
+          <div class="btn">
+            <span>手机号快捷注册</span>
+            <i class="right3"></i>
+          </div>
         </div>
       </div>
-      <div class="quickLoign">
-        <span>手机号快捷注册</span>
-        <i class="iconfont icon-jiantouyou"></i>
-      </div>
-    </section>
-    <section class="otherLogin">
-      <div class="itemOther">
-        <i class="iconfont icon-weixin"></i>
-        <span>微信</span>
-      </div>
-      <div class="itemOther">
-        <i class="iconfont icon-QQ"></i>
-        <span>QQ</span>
-      </div>
-      <div class="itemOther">
-        <i class="iconfont icon-weibo"></i>
-        <span>微博</span>
-      </div>
-    </section>
+    </div>
   </div>
 </template>
-
 <script>
-  import Header from '../../components/Header'
+  import Vue from 'vue'
+  import SWHeader from '../../components/SWHeader/SWHeader'
+  import {mapState} from 'vuex'
   export default {
-    components: {
-      Header
-    },
-    created () {
-      this.resetTop()
-    },
-    methods: {
-      resetTop () {
-        window.scrollTo(0, 0)
+    name: "Person",
+    data(){
+      return{
+        loginWay: null
       }
+    },
+    mounted (){
+
+    },
+    computed:{
+
+    },
+    methods:{
+      goLogoin(loginWay1){
+        this.loginWay = loginWay1
+        //Vue.set(this.loginWay,'loginWay')
+        this.$router.replace('/login')
+        this.$store.dispatch('setLoginWay',this.loginWay)
+      }
+    },
+    components: {
+      SWHeader
     }
   }
 </script>
-
 <style lang='stylus' rel='stylesheet/stylus' scoped>
-@import '../../common/stylus/mixins.styl'
-  .personal
-    width 100%
+  @import '../../common/stylus/mixins.styl'
+  html,body
     height 100%
-    box-sizing border-box
-    padding-top 0.88rem
-    background #f2f5f4
-    position relative
+    overflow hidden
+  .loginTypesWrap
+    padding-top 88px
     .cont
-      >.logo
+      position relative
+      height 100%
+      background #F2F5F4
+      .logoWrap
         text-align center
-        padding 1.2rem 0
-        >img
-          width 3rem
-          height 1.04rem
-      >.btns
-        padding 0.42rem
-        >.btn
-          margin-bottom 0.4rem
-          text-align center
-          border-radius 0.06rem
+        padding-top 2.13rem
+        padding-bottom 2.13rem
+        img
+          width 3.57rem
+          height 1.2rem
+        .btnWrap
+          margin-bottom .42rem
+          padding 0 .53rem
+          .loginPhone
+            background-position 0 -58px
+            margin-right .21rem
+            position relative
+            top -.03rem
+            background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/login-s2d0d826858-b284a621da.png)
+            background-size .53rem 3.86rem
+            width .53rem
+            height .53rem
+            display inline-block
+            vertical-align middle
+            background-repeat no-repeat
+            .name
+              line-height 1.25rem
+              font-size .37rem
+              color #fff
+        .ghostRed
+          margin-bottom .42rem
+          border-radius 2px
+          display block
           width 100%
-          height 0.86rem
-          line-height 0.86rem
+          height 1.25rem
+          line-height 1.25rem
+          color #b4282d
           vertical-align middle
           text-align center
-          font-size 0.28rem
-          color #444444
-          border 1px solid black
+          border 1px solid #b4282d
+          overflow hidden
+          .loginMail
+            margin-right .21rem
+            position relative
+            top -.03rem
+            background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/login-s2d0d826858-b284a621da.png)
+            background-size .53rem 3.86rem
+            width .53rem
+            height .53rem
+            display: inline-block
+            vertical-align middle
+            background-repeat no-repeat
+            line-height 1.25em
+            color #b4282d
+            text-align center
+            font-size .37rem
+            .name
+              line-height: 1.25rem
+              color #b4282d
+              text-align center
+              font-size .37rem
+        .btn
+          color #333
+          font-size .37rem
+          text-align center
+          width 100%
+          line-height 1.5
+          .right3
+            color #333
+            font-size .37rem
+            text-align center
+            line-height 1.5
+            .name
+              margin-right .21rem
+              position relative
+              top -.03rem
+              margin-left .05rem
+              display inline-block
+              vertical-align middle
+              background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/arrow-right3-c1ab37e88b.png)
+              background-repeat no-repeat
+              background-size 100% 100%
+              width .37rem
+              height .37rem
+              color #333
+              font-size .37rem
+              text-align center
+              line-height 1.5
+      .btnWrap
+        padding 0 .53rem
+        margin-bottom 2.73rem
+        .button-block
+          margin-bottom .42rem
+          border-radius 2px
+          display block
+          width 100%
+          height 1.25rem
+          line-height 1.25rem
+          vertical-align middle
+          text-align center
+          font-size .37rem
+          color #fff
+          border 1px solid #b4282d
           background-color #b4282d
-          &.dist
-            background-color #f2f5f4
-            color $main
-          >i
-            width 0.4rem
-            height 0.4rem
-            box-sizing border-box
-            font-size 0.4rem
-            vertical-align inherit
-            &.space
-              margin-right 0.1rem
-      >.quickLoign
-        color #333333
-        font-size 0.28rem
-        width 100%
-        text-align center
-        >i
-          font-size 0.28rem
-          margin-right 0.16rem
-          margin-left 0.04rem
-          color #444444
-    .otherLogin
-      position absolute
-      width 100%
-      height 0.6rem
-      left 0
-      bottom 1rem
-      text-align center
-      .itemOther
-        height 0.26rem
-        border-right 1px solid #979797
-        display inline-block
-        text-align center
-        color #979797
-        padding 0 0.6rem
-        font-size 0.26rem
-        >i
-          font-size 0.26rem
-        &:last-child
-          border-right none
+          overflow hidden
+          .loginPhone
+            background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/login-s2d0d826858-b284a621da.png);
+            background-size .53rem 3.86rem
+            width .53rem
+            height .53rem
+            display inline-block
+            vertical-align middle
+            background-repeat no-repeat
+            color #fff
+            font-size .37rem
+          span
+            line-height 1.25rem
+            text-align center
+            font-size .37rem
+            color #fff
+        .button-ghostRed
+          margin-bottom .42rem
+          border-radius 2px
+          display block
+          width 100%
+          height 1.25rem
+          line-height 1.25rem
+          color #b4282d
+          vertical-align middle
+          text-align center
+          font-size .37rem
+          border 1px solid #b4282d
+          overflow hidden
+          .loginMail
+            margin-right .21rem
+            position relative
+            top -.03rem
+            background-position 0 0
+            background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/login-s2d0d826858-b284a621da.png);
+            background-size .53rem 3.86rem
+            width .53rem
+            height .53rem
+            display inline-block
+            vertical-align middle
+            background-repeat no-repeat
+            span
+              line-height 1.25rem
+              color #b4282d
+              text-align center
+              font-size .37rem
+        .btn
+          color #333
+          font-size .37rem
+          text-align center
+          width 100%
+          line-height 1.5
+          span
+            color #333
+            font-size .37rem
+            text-align center
+            line-height 1.5
+          .right3
+            margin-right .21rem
+            position relative
+            top -.03rem
+            margin-left .05rem
+            display inline-block
+            vertical-align middle
+            background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/arrow-right3-c1ab37e88b.png)
+            background-repeat no-repeat
+            background-size 100% 100%
+            width .37rem
+            height .37rem
+            color #333
+            font-size .37rem
+            text-align center
+
 </style>

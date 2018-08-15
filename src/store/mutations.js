@@ -1,8 +1,9 @@
 import {
   RECEIVE_BANNER,
   RECEIVE_HOME,
-  RECEIVE_DATA
-
+  RECEIVE_NAV,
+  RECEIVE_GENERAL,
+  LoginWay
 } from './mutation-type'
 
 export default {
@@ -13,8 +14,14 @@ export default {
   [RECEIVE_HOME] (state, {home}) {
     state.home = home
   },
-  // [RECEIVE_DATA] (state, {topicData}) {
-  //   state.data = data
-  // },
+  [RECEIVE_NAV](state,{nav}) {
+    state.nav = nav
+  },
+  [RECEIVE_GENERAL] (state, {general}) {
+    state.general = general
+  },
+  [LoginWay](state,loginWay) {
+    state.loginWay = loginWay
+  },
 
 }

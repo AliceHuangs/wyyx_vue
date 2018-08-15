@@ -29,9 +29,11 @@
 
 <script>
   import Title from '../../components/Title/Title.vue'
+  import FooterGuide from '../../components/FooterGuide/FooterGuide.vue'
   export default {
     components: {
-      Title
+      Title,
+      FooterGuide
     },
     created () {
       this.resetTop()

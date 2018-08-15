@@ -1,20 +1,20 @@
 <template>
-  <div class="listDetail" ref="scroll" :class="{'anim' : anim === true}">
+  <div class="listDetail" v-if="nav.categoryL1List">
     <div class="warp">
       <div class="banner">
-        <img v-lazy="navDetail.wapBannerUrl" alt="">
+        <img :src="nav.categoryL1List[index].bannerUrl" alt="">
       </div>
       <div class="detailTit">
           <span class="text">
-            <span>{{navDetail.name}}</span>
+            <span>{{nav.categoryL1List[index].name}}</span>
             <span>分类</span>
           </span>
         </div>
       <section class="detail">
         <ul class="list">
-          <li class="item" v-for="(item) in navDetail.subCateList" :key="item.id">
+          <li class="item" v-for="(item,index2) in nav.categoryL1List[index].subCateList" :key="index2" >
             <a href="javascript:;">
-              <img v-lazy="item.wapBannerUrl" alt="">
+              <img :src="item.wapBannerUrl" alt="">
               <span>{{item.name}}</span>
             </a>
           </li>
@@ -25,41 +25,15 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-  import BScroll from 'better-scroll'
+
   export default {
-    data () {
-      return {
-        anim: false
-      }
+
+    props:{
+      nav: Object,
+      index: Number
     },
-    mounted () {
-      this.$store.dispatch('getNavDetail', () => {
-        this.$nextTick(() => {
-          this._initScroll()
-        })
-      })
-    },
-    computed: {
-      ...mapState(['navDetail'])
-    },
-    methods: {
-      _initScroll () {
-        new BScroll (this.$refs.scroll, {
-          click: true,
-          startY: 0
-        })
-      }
-    },
-    watch: {
-      navDetail: function () {
-        this.anim = true
-        this.timer = setTimeout(() => {
-          clearTimeout(this.timer)
-          this.anim = false
-        }, 800)
-      }
-    }
+
+
   }
 </script>
 
